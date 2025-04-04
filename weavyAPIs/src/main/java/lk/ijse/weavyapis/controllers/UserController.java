@@ -23,5 +23,15 @@ public class UserController {
     public String getUsers() throws IOException {
         return weavyService.getUsers();
     }
+
+    @PutMapping("/{uid}")
+    public String updateUser(@PathVariable String uid, @RequestBody String userJson) throws IOException {
+        return weavyService.updateUser(uid, userJson);
+    }
+
+    @DeleteMapping("/{uid}")
+    public String deleteUser(@PathVariable String uid) throws IOException {
+        return weavyService.deleteUser(uid);
+    }
 }
 

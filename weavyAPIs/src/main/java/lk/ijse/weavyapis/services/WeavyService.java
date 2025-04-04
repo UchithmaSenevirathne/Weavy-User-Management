@@ -39,4 +39,29 @@ public class WeavyService {
             return response.body().string();
         }
     }
+
+    public String updateUser(String uid, String jsonBody) throws IOException {
+        RequestBody body = RequestBody.create(jsonBody, MediaType.get("application/json"));
+        Request request = new Request.Builder()
+                .url(WEAVY_API_URL + "/" + uid)
+                .addHeader("Authorization", "Bearer " + WEAVY_API_KEY)
+                .put(body)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
+    }
+
+    public String deleteUser(String uid) throws IOException {
+        Request request = new Request.Builder()
+                .url(WEAVY_API_URL + "/" + uid)
+                .addHeader("Authorization", "Bearer " + WEAVY_API_KEY)
+                .delete()
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
+    }
 }
